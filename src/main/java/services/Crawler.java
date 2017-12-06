@@ -1,10 +1,11 @@
 package services;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Crawler implements ICrawler {
     @Override
-    public void crawl(String url) {
+    public List<String> crawl(String url) {
 
     }
 

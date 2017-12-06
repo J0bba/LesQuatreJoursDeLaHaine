@@ -1,12 +1,11 @@
 package services;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Crawler implements ICrawler {
     @Override
-    public List<String> crawl(String url) {
-
+    public ArrayList<String> crawl(String url) {
+        return null;
     }
 
     @Override
@@ -15,12 +14,12 @@ public class Crawler implements ICrawler {
     }
 
     @Override
-    public void Publish() {
+    public void publish() {
 
     }
 
     @Override
-    public void RequestNextUrl() {
+    public void requestNextUrl() {
 
     }
 }

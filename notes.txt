@@ -14,7 +14,7 @@ Services du domaine
 	Request
 		query, retroIndex à query -> liste de resultat
 
-RetroIndex ~= Historique de documents
+RetroIndex ~= Historique de documents 
 
 NOT TODO :
 Services externes

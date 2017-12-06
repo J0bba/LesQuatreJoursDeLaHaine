@@ -1,0 +1,27 @@
+map token / doc dans lesquels ils sont
+
+TODO :
+Domaine
+	entity
+	value object
+Services du domaine
+	Methode de crawl (pas le crawler) genre une interface (call JSoup) :
+		url -> list<url>
+	Indexer :
+		url -> Document
+	RetroIndex
+		Document -> void
+	Request
+		query, retroIndex à query -> liste de resultat
+
+RetroIndex ~= Historique de documents
+
+NOT TODO :
+Services externes
+	algorithmes de traitement simples qui prennent en entrée des objets du
+	domaine et qui sortent des objets du domaine (traitement métier)
+	pas de sauvegarde en BDD ou autre
+	pas de transaction
+
+	serialize
+	transaction

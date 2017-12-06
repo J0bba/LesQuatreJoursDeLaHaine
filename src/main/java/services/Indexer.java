@@ -5,7 +5,7 @@ import domain.Document;
 public class Indexer implements IIndexer {
     @Override
     public void Request(URLRepo repo) {
-        
+
     }
 
     @Override

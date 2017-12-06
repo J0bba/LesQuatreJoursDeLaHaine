@@ -1,10 +1,11 @@
 package services;
 
+import Interfaces.IIndexer;
 import domain.Document;
 
-public class Indexer implements IIndexer {
+public class IndexerService implements IIndexer {
     @Override
-    public void Request(URLRepo repo) {
+    public void Request(URLRepoService repo) {
 
     }
 

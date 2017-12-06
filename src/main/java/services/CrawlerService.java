@@ -1,8 +1,10 @@
 package services;
 
+import Interfaces.ICrawler;
+
 import java.util.ArrayList;
 
-public class Crawler implements ICrawler {
+public class CrawlerService implements ICrawler {
     @Override
     public ArrayList<String> crawl(String url) {
         return null;

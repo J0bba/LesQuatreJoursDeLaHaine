@@ -1,8 +1,10 @@
 package services;
 
+import Interfaces.IURLRepo;
+
 import java.util.ArrayList;
 
-public class URLRepo implements IURLRepo {
+public class URLRepoService implements IURLRepo {
     @Override
     public void receive(ArrayList<String> url) {
 

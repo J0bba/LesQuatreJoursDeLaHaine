@@ -23,15 +23,15 @@ public class CrawlerService implements ICrawler {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //get all links and recursively call the processPage method
+
         Elements questions = doc.select("a[href]");
         if (questions != null) {
-        for (Element link : questions) {
-          String currentUrl = link.attr("href");
-          if (currentUrl.contains("mit.edu") && !res.contains(currentUrl))
-            res.add(link.attr("abs:href"));
+          for (Element link : questions) {
+            String currentUrl = link.attr("href");
+            if (!currentUrl.startsWith("#") && !res.contains(currentUrl))
+              res.add(link.attr("abs:href"));
+          }
         }
-      }
 
         return res;
     }

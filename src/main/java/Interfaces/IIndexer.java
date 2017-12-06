@@ -4,7 +4,7 @@ import domains.Document;
 import services.URLRepoService;
 
 public interface IIndexer {
-    void Request(URLRepoService repo);
-    Document index();
+    void request(URLRepoService repo);
+    Document index(String url);
     void publish(int index);
 }

@@ -1,7 +1,7 @@
 package services;
 
 import Interfaces.IIndexer;
-import domain.Document;
+import domains.Document;
 
 public class IndexerService implements IIndexer {
     @Override

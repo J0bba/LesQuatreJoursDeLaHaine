@@ -1,6 +1,6 @@
 package Interfaces;
 
-import domain.Document;
+import domains.Document;
 import services.URLRepoService;
 
 public interface IIndexer {

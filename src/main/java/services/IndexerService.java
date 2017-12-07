@@ -2,6 +2,7 @@ package services;
 
 import Interfaces.IIndexer;
 import domains.Document;
+import domains.RetroIndex;
 import domains.Term;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Cleaner;
@@ -34,7 +35,7 @@ public class IndexerService implements IIndexer {
     }
 
     @Override
-    public domains.Document index(String url) {
+    public domains.Document index(String url, RetroIndex retroIndex) {
 
         org.jsoup.nodes.Document jsoupDoc = null;
         try {
@@ -79,7 +80,10 @@ public class IndexerService implements IIndexer {
         }
 
         for (Term term : res.getTerms())
+        {
             term.setFrequency(term.getPositions().size() / res.getTerms().size());
+            retroIndex.addDocumentToToken(term.getToken(), res);
+        }
 
         return res;
     }

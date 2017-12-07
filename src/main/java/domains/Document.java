@@ -17,6 +17,17 @@ public class Document {
         return terms;
     }
 
+    public Term getTerm(String token)
+    {
+        for (Term t : terms)
+        {
+            if (t.getToken().equals(token))
+                return t;
+        }
+
+        return null;
+    }
+
     public void addTerm(Term term) {
         this.terms.add(term);
     }

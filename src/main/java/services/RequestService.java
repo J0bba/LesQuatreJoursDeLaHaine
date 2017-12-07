@@ -11,7 +11,7 @@ import java.util.HashMap;
 public class RequestService implements IRequestService {
 
     @Override
-    public ArrayList<String> search(String url) {
+    public ArrayList<String> search(String query) {
         /*
             Ordre des appels
             Call Crawler -> res
@@ -19,6 +19,8 @@ public class RequestService implements IRequestService {
          */
 
         RetroIndex retroIndex = new RetroIndex();
+        IndexerService i = new IndexerService();
+
 
         return null;
     }

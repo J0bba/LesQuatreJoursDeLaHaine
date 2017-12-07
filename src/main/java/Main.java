@@ -1,3 +1,4 @@
+import domains.RetroIndex;
 import services.CrawlerService;
 import services.IndexerService;
 
@@ -11,6 +12,7 @@ public class Main {
     //CrawlerService crawler = new CrawlerService();
     //System.out.print(crawler.crawl("https://fr.wikipedia.org/wiki/Rinxent"));
     IndexerService indexerService = new IndexerService();
-    indexerService.index("https://en.wikipedia.org/wiki/Rinxent");
+    RetroIndex retroIndex = new RetroIndex();
+    indexerService.index("https://en.wikipedia.org/wiki/Rinxent", retroIndex);
   }
 }

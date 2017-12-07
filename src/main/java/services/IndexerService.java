@@ -10,6 +10,7 @@ import org.jsoup.safety.Whitelist;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -24,6 +25,8 @@ public class IndexerService implements IIndexer {
             new ArrayList<>(
                     Arrays.asList("ing", "ed", "ly")
             );
+
+    private final HashMap<String, ArrayList<String>> dictionary = new HashMap<>();
 
     @Override
     public void request(URLRepoService repo) {
@@ -40,44 +43,45 @@ public class IndexerService implements IIndexer {
             e.printStackTrace();
         }
 
-        if (jsoupDoc != null) {
-            org.jsoup.nodes.Document cleanDoc = new Cleaner(Whitelist.none()).clean(jsoupDoc);
-            String fullText = cleanDoc.body().text();
-            ArrayList<String> textWithoutPunctuation =
-                    new ArrayList<>(
-                            Arrays.stream(fullText.split(regex))
-                                    .map(String::toLowerCase).collect(Collectors.toList()));
-
-            textWithoutPunctuation.removeAll(stopWords);
-            for (int i = 0; i < textWithoutPunctuation.size(); i++) {
-                String current = textWithoutPunctuation.get(i);
-                for (String endWord : endWords) {
-                    if (current.endsWith(endWord))
-                        textWithoutPunctuation.set(i, current.replaceAll(endWord + "$", ""));
-                }
-            }
-
-            Document res = new Document(url);
-            for (int i = 0; i < textWithoutPunctuation.size(); i++) {
-                String token = textWithoutPunctuation.get(i);
-
-                boolean synonym = false; // TODO
-                if (synonym) {
-                    Term original = new Term("original"); // A remplacer par la recherche du term original
-                    original.addPosition(i);
-                } else {
-                    Term newTerm = new Term(token);
-                    newTerm.addPosition(i);
-                    res.addTerm(newTerm);
-                }
-            }
-
-            for (Term term : res.getTerms())
-                term.setFrequency(term.getPositions().size() / res.getTerms().size());
-
-            return res;
-        } else
+        if (jsoupDoc == null)
             return null;
+        org.jsoup.nodes.Document cleanDoc = new Cleaner(Whitelist.none()).clean(jsoupDoc);
+        String fullText = cleanDoc.body().text();
+        ArrayList<String> textWithoutPunctuation =
+                new ArrayList<>(
+                        Arrays.stream(fullText.split(regex))
+                                .map(String::toLowerCase).collect(Collectors.toList()));
+
+        textWithoutPunctuation.removeAll(stopWords);
+        for (int i = 0; i < textWithoutPunctuation.size(); i++) {
+            String current = textWithoutPunctuation.get(i);
+            for (String endWord : endWords) {
+                if (current.endsWith(endWord))
+                    textWithoutPunctuation.set(i, current.replaceAll(endWord + "$", ""));
+            }
+        }
+
+        System.out.print(textWithoutPunctuation);
+
+        Document res = new Document(url);
+        for (int i = 0; i < textWithoutPunctuation.size(); i++) {
+            String token = textWithoutPunctuation.get(i);
+
+            boolean synonym = false; // TODO
+            if (synonym) {
+                Term original = new Term("original"); // A remplacer par la recherche du term original
+                original.addPosition(i);
+            } else {
+                Term newTerm = new Term(token);
+                newTerm.addPosition(i);
+                res.addTerm(newTerm);
+            }
+        }
+
+        for (Term term : res.getTerms())
+            term.setFrequency(term.getPositions().size() / res.getTerms().size());
+
+        return res;
     }
 
     @Override

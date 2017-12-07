@@ -35,19 +35,4 @@ public class CrawlerService implements ICrawler {
 
         return res;
     }
-
-    @Override
-    public ArrayList<String> extractHicks() {
-        return null;
-    }
-
-    @Override
-    public void publish() {
-
-    }
-
-    @Override
-    public void requestNextUrl() {
-
-    }
 }

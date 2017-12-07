@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class RetroIndex {
+
+    HashMap<String, ArrayList<Document>> map;
+
     public HashMap<String, ArrayList<Document>> getMap() {
         return map;
     }
-
-    HashMap<String, ArrayList<Document>> map;
 
     public RetroIndex() {
         map = new HashMap<>();

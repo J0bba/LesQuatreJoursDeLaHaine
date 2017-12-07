@@ -3,11 +3,15 @@ package domains;
 import java.util.ArrayList;
 
 public class Document {
-    String url;
+    public String getUrl() {
+        return url;
+    }
 
-    ArrayList<Term> terms;
+    public final String url;
 
-    public Document(String url)
+    public final ArrayList<Term> terms;
+
+    public Document(final String url)
     {
         terms = new ArrayList<>();
         this.url = url;
@@ -17,18 +21,18 @@ public class Document {
         return terms;
     }
 
-    public Term getTerm(String token)
+    public Term getTerm(final String token)
     {
         for (Term t : terms)
         {
-            if (t.getToken().equals(token))
+            if (t.token.equals(token))
                 return t;
         }
 
         return null;
     }
 
-    public void addTerm(Term term) {
+    public void addTerm(final Term term) {
         this.terms.add(term);
     }
 }

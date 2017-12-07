@@ -3,13 +3,15 @@ package domains;
 import java.util.ArrayList;
 
 public class Term {
-    String token;
-    ArrayList<Integer> positions;
-    float frequency;
 
-    public Term(String token)
+    public final String token;
+    final ArrayList<Integer> positions;
+    double frequency;
+
+    public Term(final String token)
     {
         positions = new ArrayList<>();
+        frequency = 0.0;
         this.token = token;
     }
 
@@ -17,20 +19,16 @@ public class Term {
         return positions;
     }
 
-    public void addPosition(int pos)
+    public void addPosition(final int pos)
     {
         positions.add(pos);
     }
 
-    public float getFrequency() {
+    public double getFrequency() {
         return frequency;
     }
 
-    public void setFrequency(float frequency) {
+    public void setFrequency(final double frequency) {
         this.frequency = frequency;
-    }
-
-    public String getToken() {
-        return token;
     }
 }

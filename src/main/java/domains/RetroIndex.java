@@ -1,16 +1,22 @@
 package domains;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class RetroIndex {
-    ArrayList<Document> documents;
+    HashMap<String, ArrayList<Document>> map;
 
-    public RetroIndex(ArrayList<Document> documents)
-    {
-        this.documents = documents;
+    public RetroIndex() {
+        map = new HashMap<>();
     }
 
-    public ArrayList<Document> getDocuments() {
-        return documents;
+    public void addDocumentToToken(String token, Document doc) {
+        if (map.containsKey(token)) {
+            map.get(token).add(doc);
+        } else {
+            ArrayList arr = new ArrayList();
+            arr.add(doc);
+            map.put(token, arr);
+        }
     }
 }

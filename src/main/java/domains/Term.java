@@ -29,4 +29,8 @@ public class Term {
     public void setFrequency(float frequency) {
         this.frequency = frequency;
     }
+
+    public String getToken() {
+        return token;
+    }
 }

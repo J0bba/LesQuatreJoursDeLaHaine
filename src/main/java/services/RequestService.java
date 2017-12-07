@@ -21,7 +21,12 @@ public class RequestService implements IRequestService {
         RetroIndex retroIndex = new RetroIndex();
         IndexerService i = new IndexerService();
 
-
         return null;
+    }
+
+    public double computeTfIdf(RetroIndex retroIndex, String token, Document doc, ArrayList<Document> documents)
+    {
+        double idf = Math.log(documents.size() / (1 + retroIndex.getMap().get(token).size()));
+        return doc.getTerm(token).getFrequency() * idf;
     }
 }

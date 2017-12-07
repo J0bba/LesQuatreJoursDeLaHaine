@@ -9,6 +9,7 @@ public class Term {
 
     public Term(String token)
     {
+        positions = new ArrayList<>();
         this.token = token;
     }
 

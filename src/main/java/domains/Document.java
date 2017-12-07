@@ -9,6 +9,7 @@ public class Document {
 
     public Document(String url)
     {
+        terms = new ArrayList<>();
         this.url = url;
     }
 

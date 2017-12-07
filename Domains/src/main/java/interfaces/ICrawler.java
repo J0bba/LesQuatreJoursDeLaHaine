@@ -1,7 +1,6 @@
-package Interfaces;
+package interfaces;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public interface ICrawler {
     ArrayList<String> crawl(String url);

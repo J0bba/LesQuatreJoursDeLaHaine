@@ -1,3 +1,4 @@
+D1
 map token / doc dans lesquels ils sont
 
 TODO :
@@ -25,3 +26,61 @@ Services externes
 
 	serialize
 	transaction
+	
+D2
+TODO :
+Spring initializr
+@Configuration
+@EnableAsync
+
+on gere le cablage avec annotations 
+instancier le cable dans notre class path
+en XML on construit comme ca tout l'arbre de dépendance
+autowire : injecter automatiquement
+
+real todo :
+injection par propriété : on cree l'objet vide et on cherche toutes les propriétés
+auxquelles on peut mettre les valeurs, déduire le setter
+
+scope {
+	bean(TestService::class.java, TestServiceBlipImpl()) {
+		before(TestService::pong, javaMethod() { ... }
+	}
+}
+before -> à chaque appel de pong, avant ca fait "..."
+Ex : logger
+
+provider(Nested::class.java, Singleton(Nested(instanceOf(TestService::class.java))
+~= bean(Nested(insanceOf(TestService::cass.java))
+
+Scope : interface et implémentation
+Provider
+
+Exemple RetroIndex :
+bean(RetroIndex::class.java, ...)
+bean(RestServer(InstanceOf(RetroIndex::class)))
+
+le scope demande scope(insanceOf(Bite::class))
+le scope a une bibliothèque de provider
+il va chercher le premier provider qui produit Bite
+il retourne l'instance de .get() (singleton, prototype, ca doit marcher)
+
+la classe définit l'interface provider -> Moussa
+classes :
+Classe du framework
+Classe scope
+interface provider
+une implem pour les singleton
+
+interface Framework {
+	AddProvider(class);
+	GetInstanceOf(class);
+}
+
+interface Scope {
+	AddProvider();
+}
+
+interface Provider {
+	
+}

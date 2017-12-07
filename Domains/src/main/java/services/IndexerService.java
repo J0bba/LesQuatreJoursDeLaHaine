@@ -1,6 +1,6 @@
 package services;
 
-import Interfaces.IIndexer;
+import interfaces.IIndexer;
 import domains.Document;
 import domains.RetroIndex;
 import domains.Term;

@@ -1,6 +1,6 @@
 package services;
 
-import Interfaces.IRequestService;
+import interfaces.IRequestService;
 import domains.Document;
 import domains.RetroIndex;
 import domains.Term;

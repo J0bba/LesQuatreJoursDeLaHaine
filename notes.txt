@@ -7,11 +7,11 @@ Domaine
 Services du domaine
 	Methode de crawl (pas le crawler) genre une interface (call JSoup) :
 		url -> list<url>
-	Indexer :
+	Indexer : TF
 		url -> Document
 	RetroIndex
 		Document -> void
-	Request
+	Request : IDF
 		query, retroIndex à query -> liste de resultat
 
 RetroIndex ~= Historique de documents 

@@ -2,6 +2,7 @@ package services;
 
 import Interfaces.IIndexer;
 import domains.Document;
+import domains.Term;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Cleaner;
 import org.jsoup.safety.Whitelist;
@@ -26,25 +27,52 @@ public class IndexerService implements IIndexer {
     }
 
     @Override
-    public Document index(String url) {
+    public domains.Document index(String url) {
 
-        org.jsoup.nodes.Document doc = null;
+        org.jsoup.nodes.Document jsoupDoc = null;
         try {
-            doc = Jsoup.connect(url).get();
+            jsoupDoc = Jsoup.connect(url).get();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        org.jsoup.nodes.Document cleanDoc = new Cleaner(Whitelist.none()).clean(doc);
+        org.jsoup.nodes.Document cleanDoc = new Cleaner(Whitelist.none()).clean(jsoupDoc);
         String fullText = cleanDoc.body().text();
-        ArrayList textWithoutPunctuation =
+        ArrayList<String> textWithoutPunctuation =
                 new ArrayList<String>(Arrays.asList(
                         fullText.split(REGEX)
                 ).stream().map(String::toLowerCase).collect(Collectors.toList()));
 
+        // TODO : retirer -ING, -ed
         textWithoutPunctuation.removeAll(stopWords);
+
+        // DEBUG
         System.out.print(textWithoutPunctuation);
-        return null;
+
+        Document res = new Document(url);
+        for (int i = 0; i  < textWithoutPunctuation.size(); i++)
+        {
+            String token = textWithoutPunctuation.get(i);
+
+            boolean synonym = false; // TODO
+            if (synonym)
+            {
+                Term original = new Term("original"); // A remplacer par la recherche du term original
+                original.addPosition(i);
+            }
+            else
+            {
+                Term newTerm = new Term(token);
+                newTerm.addPosition(i);
+                res.addTerm(newTerm);
+            }
+        }
+
+        for (Term term : res.getTerms())
+            term.setFrequency(term.getPositions().size() / res.getTerms().size());
+
+
+        return res;
     }
 
     @Override

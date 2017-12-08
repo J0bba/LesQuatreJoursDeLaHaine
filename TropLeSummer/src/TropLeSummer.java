@@ -1,10 +1,7 @@
 import interfaces.IProvider;
 import interfaces.IScope;
-import providers.PrototypeProvider;
-import providers.SingletonProvider;
 import scopes.AnyScope;
 
-import java.util.Iterator;
 import java.util.Stack;
 
 public class TropLeSummer {
@@ -22,8 +19,7 @@ public class TropLeSummer {
 
     public <T> T getInstanceOf(Class<? extends T> classType)
     {
-        for (Iterator<IScope> iterator = scopes.iterator(); iterator.hasNext();) {
-            IScope o = iterator.next();
+        for (IScope o : scopes) {
             T instance = o.getInstanceOf(classType);
             if (instance != null)
                 return instance;

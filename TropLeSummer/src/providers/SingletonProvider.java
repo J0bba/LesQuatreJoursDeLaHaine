@@ -2,7 +2,7 @@ package providers;
 
 import interfaces.IProvider;
 
-public class SingletonProvider<T> implements IProvider<T> {
+public class SingletonProvider<T> implements IProvider {
     private final T instance;
 
     public SingletonProvider(final T instance)

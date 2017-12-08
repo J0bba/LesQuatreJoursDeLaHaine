@@ -1,6 +1,8 @@
 package providers;
 
+import aspects.AfterInvokeAspect;
 import aspects.Aspect;
+import aspects.BeforeInvokeAspect;
 import aspects.PostCreateAspect;
 import interfaces.IProvider;
 
@@ -10,11 +12,10 @@ import java.util.ArrayList;
 public class SingletonProvider<T> extends Provider<T> {
     private final T instance;
 
-    public SingletonProvider(final T instance, ArrayList<Aspect> aspects)
+    public SingletonProvider(ArrayList<Aspect> aspects, final T instance)
     {
+        super(aspects);
         this.instance = instance;
-        this.aspects.addAll(aspects);
-        // TODO : fill les lists
     }
 
     public T get() {

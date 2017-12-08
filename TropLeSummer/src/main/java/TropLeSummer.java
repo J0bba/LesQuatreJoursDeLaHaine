@@ -1,19 +1,21 @@
 import interfaces.IProvider;
 import interfaces.IScope;
+import providers.PrototypeProvider;
+import providers.SingletonProvider;
 import scopes.AnyScope;
 
 import java.util.Iterator;
 import java.util.Stack;
 
 public class TropLeSummer {
-    private final Stack<IScope> scopes = new Stack<IScope>();
+    private final Stack<IScope> scopes = new Stack<>();
 
     public TropLeSummer()
     {
         addScope();
     }
 
-    public <T extends IProvider> void addProvider(Class<? extends T> classType, T provider)
+    public <T> void addProvider(Class<T> classType, IProvider<? extends T> provider)
     {
         scopes.peek().addProvider(classType, provider);
     }

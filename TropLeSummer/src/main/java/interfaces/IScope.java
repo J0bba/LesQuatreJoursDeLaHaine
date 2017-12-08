@@ -1,6 +1,6 @@
 package interfaces;
 
 public interface IScope {
-    <T> void addProvider(Class<? extends T> classType, IProvider provider);
-    <T> T getInstanceOf(Class<? extends T> classType);
+    <T> void addProvider(Class<T> classType, IProvider<? extends T> provider);
+    <T> T getInstanceOf(Class<T> classType);
 }

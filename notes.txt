@@ -84,3 +84,14 @@ interface Scope {
 interface Provider {
 	
 }
+
+J3 :
+PointCut
+
+postCreate // avant d'envoyer l'instance
+afterInvoke // methods
+aroundInvoke
+beforeInvoke
+preDestroy
+
+DynamicProxy

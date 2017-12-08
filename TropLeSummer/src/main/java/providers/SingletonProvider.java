@@ -2,10 +2,10 @@ package providers;
 
 import interfaces.IProvider;
 
-public class SingletonProvider<T> implements IProvider {
-    T instance;
+public class SingletonProvider<T> implements IProvider<T> {
+    private final T instance;
 
-    public SingletonProvider(T instance)
+    public SingletonProvider(final T instance)
     {
         this.instance = instance;
     }

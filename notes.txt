@@ -99,3 +99,4 @@ DynamicProxy
 consumer : void func(obj)
 supplier : obj func()
 function : obj func(obj)
+runnable : void func()

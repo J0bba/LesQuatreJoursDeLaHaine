@@ -5,6 +5,7 @@ import services.CrawlerService;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.function.Consumer;
 
 public class Main {
 
@@ -15,12 +16,14 @@ public class Main {
             tropLeSummer.addProvider(
                     ICrawler.class,
                     new SingletonProvider<ICrawler>(new CrawlerService(),
-                    new ArrayList<>(Arrays.asList(new Aspect(
-                            Aspect.AspectType.BEFORE_INVOKE,
-                            o -> System.out.println("bite"),
-                            null,
-                            ICrawler.class.getMethod("crawl", String.class)
-                    )))));
+                    new ArrayList<>(Arrays.asList(
+                            new Aspect(
+                                    Aspect.AspectType.BEFORE_INVOKE,
+                                    o -> {System.out.println("bite");},
+                                    null,
+                                    ICrawler.class.getMethod("crawl", String.class)
+                            )
+                    ))));
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }

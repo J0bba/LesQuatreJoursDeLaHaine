@@ -1,6 +1,7 @@
 package providers;
 
 import aspects.Aspect;
+import aspects.Context;
 import interfaces.IProvider;
 
 import java.lang.reflect.InvocationHandler;
@@ -26,7 +27,18 @@ public abstract class Provider<T> implements IProvider<T> {
                     a.execute();
             }
 
-            Object result = method.invoke(target, args);
+            boolean oneAround = false;
+            Object result = null;
+            for (Aspect a : aspects) {
+                if (a.aspectType == Aspect.AspectType.AROUND_INVOKE && method.equals(a.method)){
+                    oneAround = true;
+
+                    result = new Context(target, /*args*/, /*methods*/).execute();
+                }
+            }
+
+            if (!oneAround)
+                result = method.invoke(target, args);
 
             for (Aspect a : aspects) {
                 if (a.aspectType == Aspect.AspectType.AFTER_INVOKE && method.equals(a.method))

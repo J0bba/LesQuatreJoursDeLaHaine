@@ -95,3 +95,7 @@ beforeInvoke
 preDestroy
 
 DynamicProxy
+
+consumer : void func(obj)
+supplier : obj func()
+function : obj func(obj)

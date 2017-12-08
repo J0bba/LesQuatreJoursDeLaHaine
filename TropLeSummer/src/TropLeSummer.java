@@ -1,7 +1,9 @@
+import aspects.Aspect;
 import interfaces.IProvider;
 import interfaces.IScope;
 import scopes.AnyScope;
 
+import java.util.ArrayList;
 import java.util.Stack;
 
 public class TropLeSummer {
@@ -16,6 +18,7 @@ public class TropLeSummer {
     {
         scopes.peek().addProvider(classType, provider);
     }
+
 
     public <T> T getInstanceOf(Class<? extends T> classType)
     {

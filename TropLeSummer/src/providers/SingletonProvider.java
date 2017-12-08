@@ -1,6 +1,7 @@
 package providers;
 
 import aspects.Aspect;
+import aspects.PostCreateAspect;
 import interfaces.IProvider;
 
 import java.lang.reflect.Proxy;
@@ -13,14 +14,14 @@ public class SingletonProvider<T> extends Provider<T> {
     {
         this.instance = instance;
         this.aspects.addAll(aspects);
+        // TODO : fill les lists
     }
 
     public T get() {
         Invocator invocator = new Invocator(instance);
 
-        for (Aspect a : aspects) {
-            if (a.aspectType == Aspect.AspectType.POST_CREATE)
-                a.execute();
+        for (PostCreateAspect a : postCreateAspects) {
+            a.execute();
         }
 
         return (T)Proxy.newProxyInstance(instance.getClass().getClassLoader(), instance.getClass().getInterfaces(), invocator);

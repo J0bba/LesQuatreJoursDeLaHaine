@@ -1,10 +1,7 @@
 package aspects;
 
-import java.lang.reflect.Method;
-import java.util.function.Consumer;
-import java.util.function.Function;
-
 public class Aspect {
+    /*
     Consumer consumer;
 
     public enum AspectType { BEFORE_INVOKE, AFTER_INVOKE, AROUND_INVOKE, POST_CREATE };
@@ -40,9 +37,6 @@ public class Aspect {
         this.arg = null;
         this.method = method;
     }
-
-    public void execute()
-    {
-        consumer.accept(arg);
-    }
+*/
+    public void execute(){}
 }

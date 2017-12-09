@@ -1,4 +1,6 @@
+import aspects.AfterInvokeAspect;
 import aspects.Aspect;
+import aspects.BeforeInvokeAspect;
 import aspects.PostCreateAspect;
 import interfaces.ICrawler;
 import providers.SingletonProvider;
@@ -10,19 +12,25 @@ import java.util.function.Consumer;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NoSuchMethodException {
         TropLeSummer tropLeSummer = new TropLeSummer();
 
         tropLeSummer.addProvider(
                 ICrawler.class,
                 new SingletonProvider<ICrawler>(
                         new ArrayList<>(Arrays.asList(
-                                new PostCreateAspect(
-                                        o -> {System.out.println("bite");},
+                                new BeforeInvokeAspect(
+                                        o -> {System.out.println("before invoke");},
+                                        ICrawler.class.getMethod("crawl", String.class),
+                                        null
+                                ),
+                                new AfterInvokeAspect(
+                                        o -> {System.out.println("after invoke");},
+                                        ICrawler.class.getMethod("crawl", String.class),
                                         null
                                 ),
                                 new PostCreateAspect(
-                                        o -> {System.out.println("chatte");},
+                                        o -> {System.out.println("post create");},
                                         null
                                 )
                         )),

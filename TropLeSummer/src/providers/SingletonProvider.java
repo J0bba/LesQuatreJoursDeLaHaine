@@ -25,6 +25,9 @@ public class SingletonProvider<T> extends Provider<T> {
             a.execute();
         }
 
-        return (T)Proxy.newProxyInstance(instance.getClass().getClassLoader(), instance.getClass().getInterfaces(), invocator);
+        return (T)Proxy.newProxyInstance(
+                instance.getClass().getClassLoader(),
+                instance.getClass().getInterfaces(),
+                invocator);
     }
 }

@@ -100,3 +100,15 @@ consumer : void func(obj)
 supplier : obj func()
 function : obj func(obj)
 runnable : void func()
+
+class AroundInvokeAspect extends Aspect (
+	public AroundInvokeAspect(..., Function function, ...)
+	{
+	}
+	
+	public T execute()
+	{
+		Context context = new Context(obj, ...);
+		return function.run(context);
+	}
+}

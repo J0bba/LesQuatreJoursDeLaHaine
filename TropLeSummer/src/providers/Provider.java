@@ -45,6 +45,8 @@ public abstract class Provider<T> implements IProvider<T> {
             Object result = null;
             if (aroundInvokeAspects.size() > 0)
             {
+                Context context = new Context(target, args);
+                //return context.execute();
                 //result = new Context();
             }
             else

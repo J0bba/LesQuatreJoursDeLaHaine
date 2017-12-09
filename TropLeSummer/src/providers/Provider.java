@@ -7,13 +7,14 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
-public abstract class Provider<T> implements IProvider<T> {
-    ArrayList<BeforeInvokeAspect> beforeInvokeAspects = new ArrayList<>();
-    ArrayList<AfterInvokeAspect> afterInvokeAspects = new ArrayList<>();
-    ArrayList<PostCreateAspect> postCreateAspects = new ArrayList<>();
-    ArrayList<AroundInvokeAspect> aroundInvokeAspects = new ArrayList<>();
+abstract class Provider<T> implements IProvider<T> {
+    private final ArrayList<BeforeInvokeAspect> beforeInvokeAspects = new ArrayList<>();
+    private final ArrayList<AfterInvokeAspect> afterInvokeAspects = new ArrayList<>();
+    final ArrayList<PostCreateAspect> postCreateAspects = new ArrayList<>();
+    private final ArrayList<AroundInvokeAspect> aroundInvokeAspects = new ArrayList<>();
 
-    public Provider(ArrayList<Aspect> aspects)
+
+    Provider(ArrayList<Aspect> aspects)
     {
         for (Aspect a : aspects)
         {
@@ -23,13 +24,15 @@ public abstract class Provider<T> implements IProvider<T> {
                 afterInvokeAspects.add(AfterInvokeAspect.class.cast(a));
             else if (a instanceof PostCreateAspect)
                 postCreateAspects.add(PostCreateAspect.class.cast(a));
+            else if (a instanceof AroundInvokeAspect)
+                aroundInvokeAspects.add(AroundInvokeAspect.class.cast(a));
         }
     }
 
     public class Invocator implements InvocationHandler {
         Object target;
 
-        public Invocator(Object target)
+        Invocator(Object target)
         {
             this.target = target;
         }
@@ -44,22 +47,11 @@ public abstract class Provider<T> implements IProvider<T> {
 
             Object result = null;
             if (aroundInvokeAspects.size() > 0)
-            {
-                Context context = new Context(target, args);
-                //return context.execute();
-                //result = new Context();
-            }
+                for (AroundInvokeAspect a : aroundInvokeAspects)
+                    if (method.equals(a.method))
+                        result = a.function.apply(new Context(target, args, a.method));
             else
                 result = method.invoke(target, args);
-
-            /*
-            for (Aspect a : aspects) {
-                if (a.aspectType == Aspect.AspectType.AROUND_INVOKE && method.equals(a.method)){
-                    oneAround = true;
-
-                    //result = new Context(target, args, methods).execute();
-                }
-            }*/
 
             for (AfterInvokeAspect a : afterInvokeAspects)
             {

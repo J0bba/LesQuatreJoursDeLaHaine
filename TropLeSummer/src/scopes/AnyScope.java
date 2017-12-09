@@ -1,10 +1,8 @@
 package scopes;
 
-import aspects.Aspect;
 import interfaces.IProvider;
 import interfaces.IScope;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class AnyScope implements IScope{

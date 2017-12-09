@@ -1,9 +1,7 @@
-import aspects.Aspect;
 import interfaces.IProvider;
 import interfaces.IScope;
 import scopes.AnyScope;
 
-import java.util.ArrayList;
 import java.util.Stack;
 
 public class TropLeSummer {

@@ -5,8 +5,8 @@ import java.util.function.Consumer;
 
 public class BeforeInvokeAspect extends Aspect {
     public final Method method;
-    public final Consumer consumer;
-    public final Object arg;
+    private final Consumer consumer;
+    private final Object arg;
 
     public BeforeInvokeAspect(final Consumer consumer, final Method method, Object arg)
     {

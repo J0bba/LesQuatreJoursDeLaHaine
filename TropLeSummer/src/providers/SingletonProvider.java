@@ -6,7 +6,7 @@ import aspects.PostCreateAspect;
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 
-public class SingletonProvider<T> extends Provider<T> {
+public class SingletonProvider<T> extends AnyProvider<T> {
     private final T instance;
 
     public SingletonProvider(final ArrayList<Aspect> aspects, final T instance)

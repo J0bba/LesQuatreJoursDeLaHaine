@@ -1,6 +1,6 @@
 package services;
 
-import interfaces.IRequestService;
+import interfaces.Request;
 import domains.Document;
 import domains.RetroIndex;
 import domains.Term;
@@ -8,7 +8,7 @@ import domains.Term;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class RequestService implements IRequestService {
+public class RequestService implements Request {
 
     @Override
     public ArrayList<String> search(String query) {

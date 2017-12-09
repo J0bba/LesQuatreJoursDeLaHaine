@@ -1,14 +1,14 @@
 package scopes;
 
-import interfaces.IProvider;
-import interfaces.IScope;
+import interfaces.Provider;
+import interfaces.Scope;
 
 import java.util.HashMap;
 
-public class AnyScope implements IScope{
-    private final HashMap<Class<?>, IProvider<?>> providers = new HashMap<>();
+public class AnyScope implements Scope {
+    private final HashMap<Class<?>, Provider<?>> providers = new HashMap<>();
 
-    public <T> void addProvider(final Class<T> classType, final IProvider<? extends T> provider) {
+    public <T> void addProvider(final Class<T> classType, final Provider<? extends T> provider) {
         providers.put(classType, provider);
     }
 
@@ -22,7 +22,7 @@ public class AnyScope implements IScope{
 
     public void applyPreDestroy()
     {
-        for (HashMap.Entry<Class<?>, IProvider<?>> entry : providers.entrySet())
+        for (HashMap.Entry<Class<?>, Provider<?>> entry : providers.entrySet())
         {
             entry.getValue().applyPreDestroy();
         }

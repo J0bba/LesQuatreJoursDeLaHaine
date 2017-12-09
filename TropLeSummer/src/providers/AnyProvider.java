@@ -1,13 +1,13 @@
 package providers;
 
 import aspects.*;
-import interfaces.IProvider;
+import interfaces.Provider;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
-abstract class Provider<T> implements IProvider<T> {
+abstract class AnyProvider<T> implements Provider<T> {
     final ArrayList<PostCreateAspect> postCreateAspects = new ArrayList<>();
     private final ArrayList<BeforeInvokeAspect> beforeInvokeAspects = new ArrayList<>();
     private final ArrayList<AfterInvokeAspect> afterInvokeAspects = new ArrayList<>();
@@ -22,7 +22,7 @@ abstract class Provider<T> implements IProvider<T> {
         }
     }
 
-    Provider(final ArrayList<Aspect> aspects)
+    AnyProvider(final ArrayList<Aspect> aspects)
     {
         for (Aspect a : aspects)
         {

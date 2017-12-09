@@ -1,6 +1,6 @@
 package interfaces;
 
-public interface IProvider<T> {
+public interface Provider<T> {
     T get();
     void applyPreDestroy();
 }

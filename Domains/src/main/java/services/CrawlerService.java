@@ -6,11 +6,11 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import interfaces.ICrawler;
+import interfaces.Crawler;
 
 import java.util.ArrayList;
 
-public class CrawlerService implements ICrawler {
+public class CrawlerService implements Crawler {
     @Override
     public ArrayList<String> crawl(String url) {
 

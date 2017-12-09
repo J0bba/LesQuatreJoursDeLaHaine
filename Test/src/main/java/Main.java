@@ -1,5 +1,5 @@
 import aspects.*;
-import interfaces.ICrawler;
+import interfaces.Crawler;
 import providers.SingletonProvider;
 import services.CrawlerService;
 
@@ -13,17 +13,17 @@ public class Main {
         TropLeSummer tropLeSummer = new TropLeSummer();
 
         tropLeSummer.addProvider(
-                ICrawler.class,
+                Crawler.class,
                 new SingletonProvider<>(
                         new ArrayList<>(Arrays.asList(
                                 new BeforeInvokeAspect(
                                         o -> System.out.println("before invoke"),
-                                        ICrawler.class.getMethod("crawl", String.class),
+                                        Crawler.class.getMethod("crawl", String.class),
                                         null
                                 ),
                                 new AfterInvokeAspect(
                                         o -> System.out.println("after invoke"),
-                                        ICrawler.class.getMethod("crawl", String.class),
+                                        Crawler.class.getMethod("crawl", String.class),
                                         null
                                 ),
                                 new PostCreateAspect(
@@ -46,13 +46,13 @@ public class Main {
                                             System.out.println("after around");
                                             return res;
                                         },
-                                        ICrawler.class.getMethod("crawl", String.class)
+                                        Crawler.class.getMethod("crawl", String.class)
                                 )
                         )),
                         new CrawlerService()
                 ));
 
-        tropLeSummer.getInstanceOf(ICrawler.class).crawl("https://pastebin.com/i2F3T8ad");
+        tropLeSummer.getInstanceOf(Crawler.class).crawl("https://pastebin.com/i2F3T8ad");
         tropLeSummer.popScope();
     }
 }

@@ -1,6 +1,6 @@
 package services;
 
-import interfaces.IIndexer;
+import interfaces.Indexer;
 import domains.Document;
 import domains.RetroIndex;
 import domains.Term;
@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.stream.Collectors;
 
-public class IndexerService implements IIndexer {
+public class IndexerService implements Indexer {
 
   private static final String regex = "[^a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ']+";
   private static final ArrayList<String> stopWords =

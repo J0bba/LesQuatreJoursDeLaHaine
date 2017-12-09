@@ -1,4 +1,4 @@
-package server;
+package eventBus;
 
 import java.time.LocalDateTime;
 import java.util.function.Consumer;

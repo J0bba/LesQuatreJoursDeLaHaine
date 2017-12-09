@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class SingletonProvider<T> extends Provider<T> {
     private final T instance;
 
-    public SingletonProvider(ArrayList<Aspect> aspects, final T instance)
+    public SingletonProvider(final ArrayList<Aspect> aspects, final T instance)
     {
         super(aspects);
         this.instance = instance;

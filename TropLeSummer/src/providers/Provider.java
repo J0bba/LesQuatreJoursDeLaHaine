@@ -8,13 +8,21 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 abstract class Provider<T> implements IProvider<T> {
+    final ArrayList<PostCreateAspect> postCreateAspects = new ArrayList<>();
     private final ArrayList<BeforeInvokeAspect> beforeInvokeAspects = new ArrayList<>();
     private final ArrayList<AfterInvokeAspect> afterInvokeAspects = new ArrayList<>();
-    final ArrayList<PostCreateAspect> postCreateAspects = new ArrayList<>();
     private final ArrayList<AroundInvokeAspect> aroundInvokeAspects = new ArrayList<>();
+    private final ArrayList<BeforeDestroyAspect> beforeDestroyAspects = new ArrayList<>();
 
+    public void applyPreDestroy()
+    {
+        for (BeforeDestroyAspect a : beforeDestroyAspects)
+        {
+            a.execute();
+        }
+    }
 
-    Provider(ArrayList<Aspect> aspects)
+    Provider(final ArrayList<Aspect> aspects)
     {
         for (Aspect a : aspects)
         {
@@ -26,13 +34,15 @@ abstract class Provider<T> implements IProvider<T> {
                 postCreateAspects.add(PostCreateAspect.class.cast(a));
             else if (a instanceof AroundInvokeAspect)
                 aroundInvokeAspects.add(AroundInvokeAspect.class.cast(a));
+            else if (a instanceof BeforeDestroyAspect)
+                beforeDestroyAspects.add(BeforeDestroyAspect.class.cast(a));
         }
     }
 
     public class Invocator implements InvocationHandler {
-        Object target;
+        final Object target;
 
-        Invocator(Object target)
+        Invocator(final Object target)
         {
             this.target = target;
         }

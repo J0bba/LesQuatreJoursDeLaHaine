@@ -12,13 +12,13 @@ public class TropLeSummer {
         addScope();
     }
 
-    public <T> void addProvider(Class<T> classType, IProvider<? extends T> provider)
+    public <T> void addProvider(final Class<T> classType, final IProvider<? extends T> provider)
     {
         scopes.peek().addProvider(classType, provider);
     }
 
 
-    public <T> T getInstanceOf(Class<? extends T> classType)
+    public <T> T getInstanceOf(final Class<? extends T> classType)
     {
         for (IScope o : scopes) {
             T instance = o.getInstanceOf(classType);
@@ -34,8 +34,9 @@ public class TropLeSummer {
         scopes.add(new AnyScope());
     }
 
-    public void removeScope()
+    public void popScope()
     {
+        scopes.peek().applyPreDestroy();
         scopes.pop();
     }
 }

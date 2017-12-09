@@ -8,9 +8,9 @@ public class Context {
     final Object[] args;
     final Method method;
 
-    public Context(Object instance, Object[] args, Method method)
+    public Context(final Object instance, final Object[] args, final Method method)
     {
-        this.instance =instance;
+        this.instance = instance;
         this.args = args;
         this.method = method;
     }

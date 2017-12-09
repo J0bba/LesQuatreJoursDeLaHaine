@@ -112,3 +112,10 @@ class AroundInvokeAspect extends Aspect (
 		return function.run(context);
 	}
 }
+
+J4 :
+event bus
+EventSourcing
+	Toutes les transactions doivent etre tracables, atomatiques et sourcées
+CQRS
+	Command Query 

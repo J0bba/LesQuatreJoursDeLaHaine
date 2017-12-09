@@ -1,7 +1,4 @@
-import aspects.AfterInvokeAspect;
-import aspects.AroundInvokeAspect;
-import aspects.BeforeInvokeAspect;
-import aspects.PostCreateAspect;
+import aspects.*;
 import interfaces.ICrawler;
 import providers.SingletonProvider;
 import services.CrawlerService;
@@ -33,30 +30,20 @@ public class Main {
                                         o -> System.out.println("post create"),
                                         null
                                 ),
-                                new AroundInvokeAspect(
-                                        context -> {
-                                            System.out.println("before around 1");
-                                            Object res = null;
-                                            try {
-                                                res = context.execute();
-                                            } catch (InvocationTargetException | IllegalAccessException e) {
-                                                e.printStackTrace();
-                                            }
-                                            System.out.println("after around 1");
-                                            return res;
-                                        },
-                                        ICrawler.class.getMethod("crawl", String.class)
+                                new BeforeDestroyAspect(
+                                        o -> System.out.println("before destroy"),
+                                        null
                                 ),
                                 new AroundInvokeAspect(
                                         context -> {
-                                            System.out.println("before around 2");
+                                            System.out.println("before around");
                                             Object res = null;
                                             try {
                                                 res = context.execute();
                                             } catch (InvocationTargetException | IllegalAccessException e) {
                                                 e.printStackTrace();
                                             }
-                                            System.out.println("after around 2");
+                                            System.out.println("after around");
                                             return res;
                                         },
                                         ICrawler.class.getMethod("crawl", String.class)
@@ -66,5 +53,6 @@ public class Main {
                 ));
 
         tropLeSummer.getInstanceOf(ICrawler.class).crawl("https://pastebin.com/i2F3T8ad");
+        tropLeSummer.popScope();
     }
 }

@@ -10,7 +10,7 @@ import java.util.function.Supplier;
 public class PrototypeProvider<T> extends Provider<T> {
     final Supplier<T> supplier;
 
-    public PrototypeProvider(ArrayList<Aspect> aspects, final Supplier<T> supplier)
+    public PrototypeProvider(final ArrayList<Aspect> aspects, final Supplier<T> supplier)
     {
         super(aspects);
         this.supplier = supplier;

@@ -12,8 +12,4 @@ public class AroundInvokeAspect extends Aspect {
         this.function = function;
         this.method = method;
     }
-
-    @Override
-    public void execute() {
-    }
 }
